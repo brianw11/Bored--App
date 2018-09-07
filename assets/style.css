@@ -1,6 +1,6 @@
-* {
-  max-width: 1200px;
-}
+/* * { */
+  /* max-width: 1200px; */
+/* } */
 
 .buttons {
   width: 100px;
@@ -72,17 +72,17 @@ input {
 
 .enter-interests {
   font-family: 'Jura', sans-serif;
-  margin-right: 5%;
+  margin-right: 3%;
 }
 
 .enter-location {
   font-family: 'Jura', sans-serif;
- margin-right: 23%; 
+ margin-right: 18%; 
 }
 
 .enter-date {
   font-family: 'Jura', sans-serif;
- margin-right: 34%; 
+ margin-right: 28%; 
 }
 
 .inputs {
@@ -107,6 +107,14 @@ background-color: #aba9c3;
 
 form {
   padding-left: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 
 .btn.btn-submit {
@@ -160,7 +168,7 @@ form {
 
 .panel-title.local {
   font-family: 'Jura', sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   margin-top: 10px;
 }
 
