@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
   <title>Bored-App</title>
-
-
+  <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Allura|Rock+Salt" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poiret+One&amp;subset=cyrillic,latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Allura|Rock+Salt|Short+Stack" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Expanded" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Jura:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:500" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/style.css">
@@ -12,86 +20,114 @@
 
 <body>
 
-
-
   <div class="container">
-
-    <br>
-
-
-    <div class="jumbotron">
-      <h1 class="text-center logo">Bored?</h1>
-    </div>
-
-    <div>
-
-
-      <h4>Here are some ideas:</h4>
-
-      <div class="col-lg-3">
-      </div>
-      <div class="col-lg-2">
-        <button class="button 1" id="select-1" type="submit">Pick Me</button>
-      </div>
-      <div class="col-lg-2">
-        <button class="button 2" id="select-2" type="submit">Pick Me</button>
-      </div>
-      <div class="col-lg-2">
-        <button class="button 3" id="select-3" type="submit">Pick Me</button>
-      </div>
-      <div class="col-lg-3">
-      </div>
-
-    </div>
-
-
+    <h1 class="text-center logo"><b>Bored?</b></h1>
 
     <div class="row">
-      <div class="col-lg-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div id="map">GOGGLE MAP
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-lg-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">MeetUp List of Events</h3>
-          </div>
-          <div id="meetup">
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="col-lg-4">
-        </div>
-        <div class="col-lg-4">
-          <div class="panel-body" id="recent-member">
-            Still Bored?
-            <button type="submit">Find More</button>
-          </div>
-        </div>
-        <div class="col-lg-4">
-        </div>
+      <h3 class="today">Get out and have some fun!</h3>
+      <div class="col-lg-12 banner-pic image">
+        <img class="text-center banner-pic" src="assets/images/fun-people.png" alt="">
       </div>
     </div>
 
-  </div>
+    <div class="row">
 
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-trekking-filled-50.png" alt="">
+      </div>
 
-  </div>
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-dining-room-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-sport-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-soccer-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-skiing-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-genderqueer-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-basketball-player-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-baseball-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-cycling-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-golf-filled-50.png" alt="">
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-theatre-mask-filled-50.png" alt="">
+
+      </div>
+
+      <div class="col-lg-1 icon">
+        <img src="assets/images/icons8-rock-music-filled-50.png" alt="">
+      </div>
+    </div>
+
+    <div class="row inputs">
+      <div class="button-group">
+        <h4 class="ideas">List of Interests:</h4>
+        <button class="idea-button button-1" style="margin-left: 25%" type="submit">Placeholder</button>
+        <button class="idea-button button-2" type="submit">Placeholder</button>
+        <button class="idea-button button-3" type="submit">Placeholder</button>
+
+      </div>
+    </div>
+
+    <div class="results col-lg-6">
+      <h3 class="panel-title local">Google Map</h3>
+      <div class="panel panel-default">
+        <div class="panel-body" id="map">
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="results col-lg-6">
+      <div class="panel-heading">
+        <h3 class="panel-title local">MeetUp List of Events</h3>
+
+        <div class="panel-heading">
+        </div>
+
+        <div class="panel-body recommendations" id="meetup">
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p class="foot-text"> &copy; Bored 2018</p>
+      <div class="media">
+        <img class="linkedin" src="assets/images/icons8-twitter-48.png" alt="twitter">
+        <img class="facebook" src="assets/images/icons8-facebook-48.png" alt="facebook">
+      </div>
+    </footer>
 
   </div>
 
 
 </body>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb2mZgiIgj3ns3iK4surGDeWRA-2W61gk" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="assets/app.js"></script>
