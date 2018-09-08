@@ -6,7 +6,47 @@ var lat = 0;
 var lng = 0;
 
 
-//Meetup API Ajax
+
+//Meetup Reccommendations
+var recommendURL = "https://api.meetup.com/recommended/groups?";
+$.ajax({
+        url: recommendURL,
+        method: "GET",
+        dataType: 'jsonp',
+        data: {
+            key: "477062e6c76427b59387c3568115f",
+           
+            page: 5,
+        }
+    })
+    .then(function (response) {
+        console.log("Recommend Response", response.data);
+
+
+        for (var i = 0; i < response.data.length; i++) {
+            var recommend = $("<div>").addClass("groups");
+            var name = response.data[i].name
+            var next = response.data[i].next_event.name
+            var nextTime = response.data[i].next_event.time
+            var link = response.data[i].link
+
+            // console.log(name);
+            //console.log(link);
+
+            recommend.append("Group: " + name);
+            recommend.append("Next Event: " + next);
+            recommend.append("Time: " + nextTime);
+            recommend.append(link)
+
+            $("#recommendations-field").append(recommend);
+        }
+    });
+
+
+
+
+
+//Meetup searched events
 var meetupURL = "https://api.meetup.com/find/upcoming_events?";
 $.ajax({
         url: meetupURL,
@@ -30,14 +70,14 @@ $.ajax({
             lat = parseFloat(response.data.events[i].group.lat);
             lng = parseFloat(response.data.events[i].group.lon);
 
-            console.log(title);
-            console.log(link);
-            console.log(lat);
-            console.log(lng);
+            //console.log(title);
+            // console.log(link);
+            // console.log(lat);
+            // console.log(lng);
 
-            meetDiv.append(title);
-            meetDiv.append(desc);
-            meetDiv.append(link)
+            meetDiv.append("Group: " + title);
+            meetDiv.append("Description: " + desc);
+            meetDiv.append("Check it out: " + link)
 
             $("#meetup").append(meetDiv);
 
@@ -56,24 +96,28 @@ $.ajax({
 console.log("Locations Objects", locations);
 
 
+
+
 //google maps section
 function initMap() {
     // The map, centered at event
     var map = new google.maps.Map(
         document.getElementById('map'), {
-            zoom: 8,
+            zoom: 10,
             center: defaultMarker
         });
-    // The marker, positioned at each event
-    var infowindow = new google.maps.InfoWindow();
 
-    var marker, i;
+    // The marker, positioned at each event
+
 
     for (i = 0; i < locations.length; i++) {
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-            map: map
-        });
 
+        var marker = new google.maps.Marker({
+            map: map,
+            title: locations[i].title,
+            position: new google.maps.LatLng(locations[i].lat, locations[i].lng)
+        })
+        
     }
 };
+
