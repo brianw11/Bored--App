@@ -230,4 +230,8 @@ p.foot-text {
   text-align: center;
 }
 
+#map{
+  height: 450px;
+  width: 500px;
+}
 
