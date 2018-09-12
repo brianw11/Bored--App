@@ -1,17 +1,17 @@
-// var myIndex = 0;
-// carousel();
+var myIndex = 0;
+carousel();
 
-// function carousel() {
-//     var i;
-//     var x = document.getElementsByClassName("mySlides");
-//     for (i = 0; i < x.length; i++) {
-//        x[i].style.display = "none";  
-//     }
-//     myIndex++;
-//     if (myIndex > x.length) {myIndex = 1}    
-//     x[myIndex-1].style.display = "block";  
-//     setTimeout(carousel, 9000);    
-// }
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 9000);    
+}
 
 //google maps api key AIzaSyDb2mZgiIgj3ns3iK4surGDeWRA-2W61gk
 //meetup api key 477062e6c76427b59387c3568115f
@@ -20,8 +20,22 @@ var locations = [];
 var lat = 0;
 var lng = 0;
 var zip = 80202;
-var interest = "hiking";
+var interest = "hiking"; //need to pull from firebase...
 
+//find zipcode from user input to pull from meetup api
+function zipcode() {
+    var zipcode = document.getElementById("location-input").value;
+    geocoder.geocode({
+        "location-input": zipcode
+    }, function (results, status) {
+        if (status == 'OK') {
+
+            console.log("zipcode latlng", results);
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
 
 //Meetup Reccommendations
 var recommendURL = "https://api.meetup.com/recommended/groups?";
@@ -44,20 +58,16 @@ $.ajax({
             var next = response.data[i].next_event.name
             var nextTime = response.data[i].next_event.time
             var link = response.data[i].link
-
-            // console.log(name);
-            //console.log(link);
+            var timeFormat = moment(nextTime).format("ddd MMM Do h:mm a");
 
             recommend.append("Group: " + name);
             recommend.append("Next Event: " + next);
-            recommend.append("Time: " + nextTime);
+            recommend.append("Time: " + timeFormat);
             recommend.append(link)
 
             $("#recommendations-field").append(recommend);
         }
     });
-
-
 
 
 
@@ -76,7 +86,6 @@ $.ajax({
     .then(function (response) {
         console.log("Ajax Response", response.data.events);
 
-
         for (var i = 0; i < response.data.events.length; i++) {
             var meetDiv = $("<div>").addClass("groups");
             var title = response.data.events[i].group.name
@@ -84,11 +93,6 @@ $.ajax({
             var link = response.data.events[i].link
             lat = parseFloat(response.data.events[i].group.lat);
             lng = parseFloat(response.data.events[i].group.lon);
-
-            // console.log(title);
-            // console.log(link);
-            // console.log(lat);
-            // console.log(lng);
 
             meetDiv.append("Group: " + title);
             meetDiv.append("Description: " + desc);
@@ -112,16 +116,11 @@ $.ajax({
 console.log("Locations Objects", locations);
 
 
-
-
 //google maps section
-
-
-    
-
 var geocoder;
+
 function initMap() {
-    // The map, centered at zip from client input
+    // The map, centered at zip from client input(latlng)
     codeAddress();
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng();
@@ -130,17 +129,20 @@ function initMap() {
             zoom: 10,
             center: latlng
         })
-        function codeAddress() {
-            var address = document.getElementById("location-input").value;
-            geocoder.geocode( {"location-input": address}, function(results, status) {
-              if (status == 'OK') {
+
+    function codeAddress() {
+        var address = document.getElementById("location-input").value; //need to find id for zipcode from firebase...
+        geocoder.geocode({
+            "location-input": address
+        }, function (results, status) {
+            if (status == 'OK') {
                 map.setCenter(results[0].geometry.location);
                 console.log("latlng", results);
-              } else {
+            } else {
                 alert('Geocode was not successful for the following reason: ' + status);
-              }
-            });
-          }
+            }
+        });
+    }
 
     // The marker, positioned at each event
     for (i = 0; i < locations.length; i++) {
