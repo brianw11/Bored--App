@@ -245,3 +245,9 @@ p.foot-text {
 .media {
   text-align: center;
 }
+
+#map{
+  height: 450px;
+  width: 500px;
+}
+
