@@ -1,4 +1,4 @@
-var myIndex = 0;
+    var myIndex = 0;
 
 carousel();
 
@@ -7,13 +7,72 @@ console.log("it works");
 var i;
     var x = document.getElementsByClassName("mySlides");
     for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";  
+       x[i].style.display = "none";
     }
     myIndex++;
     if (myIndex > x.length) {myIndex = 1}    
     x[myIndex-1].style.display = "block";  
     setTimeout(carousel, 6000);    
 }
+
+  $(document).ready(function () {
+    // Firebase config
+      var config = {
+        apiKey: "AIzaSyBwd_OkkJXouIWKyJSE4dAY2v_4IHVvCVY",
+        authDomain: "bored-app-7c3ca.firebaseapp.com",
+        databaseURL: "https://bored-app-7c3ca.firebaseio.com",
+        projectId: "bored-app-7c3ca",
+        storageBucket: "bored-app-7c3ca.appspot.com",
+        messagingSenderId: "728778720565"
+    };
+    //Firebase Initialized...
+    firebase.initializeApp(config);
+
+    //Firebase Section ---
+
+    var database = firebase.database();
+    //Firebase variables
+    var username = $("#username-input");
+    var zipcode = $("#zipcodeMain-input");
+    var interest= $("#interest-input");
+    var email = $("#email-input");
+    var password = $("#password-input")
+
+    function writeUserData(username, email, password, zipcode) {
+    //Firebase functions
+        firebase.database().ref('users/' + username).set({
+            email: email,
+            password: password,
+            zipcode: zipcode
+        })
+        
+
+    function saveInterest(username, zipcode, interest) {
+        firebase.database().ref('users/' + username + "/zipcode").set({
+            zipcode: zipcode,
+            interest: interest
+        })    
+    }
+
+    database.ref().on("value", function(snapshot){
+        console.log(snapshot.val());
+    })
+
+    $("#submit").on("click", function(event) {
+        event.preventDefault();
+        saveInterest();
+        createInterestBtn();
+    })
+
+    $("#signin").on("click", function(event) {
+        event.preventDefault();
+        console.log("Yay");
+        writeUserData();  
+        
+    })
+})
+
+
 
 //google maps api key AIzaSyDb2mZgiIgj3ns3iK4surGDeWRA-2W61gk
 //meetup api key 477062e6c76427b59387c3568115f
