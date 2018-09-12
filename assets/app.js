@@ -57,8 +57,6 @@ $(document).ready(function () {
 
 
 
-
-
     //Meetup searched events
     var meetupURL = "https://api.meetup.com/find/upcoming_events?";
     $.ajax({
@@ -109,8 +107,6 @@ $(document).ready(function () {
     console.log("Locations Objects", locations);
 
 
-
-
     //google maps section
     function initMap() {
         // The map, centered at event
@@ -135,78 +131,46 @@ $(document).ready(function () {
     };
 
     //Firebase Section ---
+
     //Firebase variables
     var database = firebase.database();
     var username = $("#username-input");
-    var interest = $("#interest-input");
-    var location = $("#location-input");
-    var password = $("#password-input");
+    var interest= $("#interest-input");
+    var zipcode = $("#zipcodeMain-input");
     var email = $("#email-input");
+    var password = $("#password-input")
 
-    $("#createaccount").on("click", function () {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
 
-            .catch(function (err) {
-                // Handle errors
-            })
-        console.log(password, email, username);
+    $("#signin").on("click", function () {
+        writeUserData();  
+        console.log("Yay");
+    })
+    
+    //Firebase functions
+    function writeUserData() {
+        database.ref()('users/' + username).set({
+            email: email,
+            password: password,
+            zipcode: zipcode
+        })
+    }
+    
+
+    function saveInterest() {
+        database.ref()('users/' + username + "/zipcode").set({
+            zipcode: zipcode,
+            interest: interest
+        })    
+    }
+
+    database.ref().on("value", function(snapshot){
+        console.log(snapshot.val());
     })
 
+    $("#submit").on("click", function() {
+        saveInterest();
+        createInterestBtn();
+    })
 
-    // Register a new user
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-        .catch(function (err) {
-            // Handle errors
-        });
-
-    // Sign in existing user
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .catch(function (err) {
-            // Handle errors
-        });
-
-    // Sign out user
-    firebase.auth().signOut()
-        .catch(function (err) {
-            // Handle errors
-        });
-
-    $("#submit").on("click", function (event) {
-        event.preventDefault();
-        console.log("ItWorked");
-
-        //Get Inputs
-        // name = $("#nameInput").val().trim();
-        interests = $("#interests-input").val().trim();
-        // date = $("#date-input").val().trim();
-        location = $("#location-input").val().trim();
-
-        //Change what is saved in firebase
-        database.ref().push({
-            //name: name,
-            //date: date,
-            location: location,
-            interests: interests,
-            //dateAdded: firebase.database.Servervalue.TIMESTAMP
-
-        });
-
-        database.ref().on("child_added", function (childSnapshot) {
-            // Log everything that's coming out of snapshot
-            console.log(childSnapshot.val());
-        });
-    });
-
-//-----
-    firebase.auth().onAuthStateChanged(function (user) {
-        window.user = user; // user is undefined if no user signed in
-    });
-
-
-
-/* Additional Firebase Pseudo Code .....
-Firebase - email sign in.   
-
-On submit button - take the information in the form and submit it to firebase
-*/
+    
 })

@@ -11,19 +11,9 @@
 <!-- <link rel="stylesheet" type="text/css" href="index2.html"> -->
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Allura|Rock+Salt" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Poiret+One&amp;subset=cyrillic,latin-ext" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Allura|Rock+Salt|Short+Stack" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Expanded" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded:700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Jura:700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Dosis:500" rel="stylesheet">
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Allura|Rock+Salt" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Poiret+One&amp;subset=cyrillic,latin-ext" rel="stylesheet">
@@ -41,15 +31,15 @@
   <h1 class="text-center logo"><b>Bored?</b></h1>
     <div class="row">
         <div class="col-lg-10">
-        </div>
+            
       <div class="col-lg-1">
         <button class="buttons button-1" type="submit" name="submit">Join</button>
       </div>
       <div class="col-lg-1">
-        <button class="buttons" type="submit" name="submit">Sign In</button>
+        <button class="buttons btn btn-success"type="button" name="submit" data-toggle="modal" data-target="#modalsignin">Sign In</button>
       </div>
     </div>
-
+    
       <div class="row banner">
           <h3 class="today">What are you going to do today?</h3>
         <div class="col-lg-12 banner-pic image">
@@ -110,16 +100,34 @@
       </div>  
     </div>
 
-
 <div class="row inputs">
     <div class="form col-lg-7">
+        <form role="form">
+          <div class="form-group">
+            <label class="enter-name" for="name-input">Enter Your Username:</label>
+            <input class="username" id="username-input" type="text">
+          </div>
+          <div class="form-group">
+              <label class="enter-email" for="email-input">Email:</label>
+              <input class="email box" id="email-input" type="email">
+          </div>
+          <div class="form-group">
+              <label class="enter-password" for="password-input">Password:</label>
+              <input class="password box" id="password-input" type="password">
+          </div>
+          <div class="form-group">
+            <label class="enter-zip" for="zipcode-input">Zip Code:</label>
+            <input class="zipcode box" id="zipcodeMain-input" type="number">
+          </div>
+          <button class="btn btn-submit" id="signin" type="submit">Submit</button>
+        </form>
         <form role="form">
               <div class="form-group">
                 <label class="enter-interest" for="name-input">Enter Your Interest:</label>
                 <input class="interests box" id="interest-input" type="text">
               </div>
               <div class="form-group">
-                <label class="enter-location" for="zip-input">Zip Code:</label>
+                <label class="enter-location" for="zipcode-input">Zip Code:</label>
                 <input class="location box" id="location-input" type="number">
               </div>
               <button class="btn btn-submit" id="submit" type="submit">Submit</button>
@@ -162,7 +170,7 @@
         </div> 
     </footer>
 </div>
-  
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
 <script src="assets/js/app.js" type="text/javascript"></script>
 </body>
 
