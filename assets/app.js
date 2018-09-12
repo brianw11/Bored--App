@@ -140,24 +140,18 @@ $(document).ready(function () {
     var email = $("#email-input");
     var password = $("#password-input")
 
-
-    $("#signin").on("click", function () {
-        writeUserData();  
-        console.log("Yay");
-    })
-    
     //Firebase functions
-    function writeUserData() {
-        database.ref()('users/' + username).set({
+    function writeUserData(username, email, password, zipcode) {
+        firebase.database().ref('users/' + username).set({
             email: email,
             password: password,
             zipcode: zipcode
         })
     }
-    
 
-    function saveInterest() {
-        database.ref()('users/' + username + "/zipcode").set({
+
+    function saveInterest(username, zipcode, interest) {
+        firebase.database().ref('users/' + username + "/zipcode").set({
             zipcode: zipcode,
             interest: interest
         })    
@@ -167,10 +161,16 @@ $(document).ready(function () {
         console.log(snapshot.val());
     })
 
-    $("#submit").on("click", function() {
+    $("#submit").on("click", function(event) {
+        event.preventDefault();
         saveInterest();
         createInterestBtn();
     })
 
-    
+    $("#signin").on("click", function(event) {
+        event.preventDefault();
+        console.log("Yay");
+        writeUserData();  
+        
+    })
 })
