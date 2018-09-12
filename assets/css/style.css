@@ -1,12 +1,10 @@
 /* * {
   max-width: 1200px;
 } */
-
 /* body {
   background: url('../images/background.jpg');
   z-index: 800;
 } */
-
 .buttons {
   width: 100px;
   height: 30px;
@@ -48,9 +46,28 @@
   filter: brightness(80%);
 }
 
-.mySlides.w3-animate-fading {
+.mySlides {
   height: 500px;
   width: 100%;
+  border: 5px outset #aba9c3;
+}
+
+.w3-animate-fading {
+  animation: fading 10s infinite
+}
+
+@keyframes fading {
+  0% {
+    opacity: 0
+  }
+
+  50% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0
+  }
 }
 
 .today {
@@ -77,8 +94,7 @@ label {
   font-size: 30px;
 }
 
-input {
-}
+input {}
 
 .enter-interest {
   font-family: 'Jura', sans-serif;
@@ -87,20 +103,20 @@ input {
 
 .enter-location {
   font-family: 'Jura', sans-serif;
-  margin-right: 27%; 
+  margin-right: 27%;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 .enter-date {
   font-family: 'Jura', sans-serif;
-  margin-right: 28%; 
+  margin-right: 28%;
 }
 
 .inputs {
@@ -129,8 +145,8 @@ form {
 }
 
 .btn.btn-submit {
- font-size: 22px; 
- padding-bottom: 5px;
+  font-size: 22px;
+  padding-bottom: 5px;
 }
 
 .btn-submit {
@@ -229,5 +245,3 @@ p.foot-text {
 .media {
   text-align: center;
 }
-
-
