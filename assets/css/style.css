@@ -215,7 +215,7 @@ form {
 }
 
 .right-div {
-  height: 292px;
+  height: 450px;
   overflow: scroll;
 }
 
@@ -250,4 +250,10 @@ p.foot-text {
   height: 450px;
   width: 500px;
 }
+
+.bold{
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+
 
