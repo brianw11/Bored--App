@@ -1,91 +1,98 @@
-var myIndex = 0;
+    
+    var myIndex = 0;
+    
 
-carousel();
+    carousel();
 
-function carousel() {
-
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
+    function carousel() {
+        console.log("it works");
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {
+            myIndex = 1
+        }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 6000);
     }
-    myIndex++;
-    if (myIndex > x.length) {
-        myIndex = 1
-    }
-    x[myIndex - 1].style.display = "block";
-    setTimeout(carousel, 6000);
-}
 
-var interest;
-var zipcode;
-var userInterest;
-var int;
-$(document).ready(function () {
-    //start maps functions
-    //codeAddress();
-    meetup();
+ $(document).ready(function () {
+     meetup();
+        // Firebase config
+        var config = {
+            apiKey: "AIzaSyBwd_OkkJXouIWKyJSE4dAY2v_4IHVvCVY",
+            authDomain: "bored-app-7c3ca.firebaseapp.com",
+            databaseURL: "https://bored-app-7c3ca.firebaseio.com",
+            projectId: "bored-app-7c3ca",
+            storageBucket: "bored-app-7c3ca.appspot.com",
+            messagingSenderId: "728778720565"
+        };
+        //Firebase Initialized...
+        firebase.initializeApp(config);
 
+        //Firebase Section ---
 
+        var database = firebase.database();
+        //Firebase variables
+        var username = $("#username-input").val().trim();
+        var interest= $("#interest-input").val().trim();
+        var email = $("#email-input").val().trim();
+        var password = $("#password-input").val().trim();
+        var zipcode ="";
 
-    // Firebase config
-    var config = {
-        apiKey: "AIzaSyBwd_OkkJXouIWKyJSE4dAY2v_4IHVvCVY",
-        authDomain: "bored-app-7c3ca.firebaseapp.com",
-        databaseURL: "https://bored-app-7c3ca.firebaseio.com",
-        projectId: "bored-app-7c3ca",
-        storageBucket: "bored-app-7c3ca.appspot.com",
-        messagingSenderId: "728778720565"
-    };
-    //Firebase Initialized...
-    firebase.initializeApp(config);
-
-    //Firebase Section ---
-
-    var database = firebase.database();
-    //Firebase variables
-    var username = $("#username-input");
-    var zipcode = $("#zipcodeMain-input");
-    var interest = $("#interest-input");
-    var email = $("#email-input");
-    var password = $("#password-input")
-
-    function writeUserData(username, email, password, zipcode) {
         //Firebase functions
-        firebase.database().ref('users/' + username).set({
-            email: email,
-            password: password,
-            zipcode: zipcode
+        function writeUserData() {
+        var username = $("#username-input").val().trim();
+        var interest= $("#interest-input").val().trim();
+        var email = $("#email-input").val().trim();
+        var password = $("#password-input").val().trim();
+        //Firebase functions
+            firebase.database().ref('users/' + username).set({
+                email: email,
+                password: password,
+            });
+            sessionStorage.setItem("username", username);
+        }
+
+         function saveInterest(username, zipcode, interest) {
+            var username = sessionStorage.getItem("username");
+                zipcode = $("#location-input").val().trim();
+            var interest= $("#interest-input").val().trim();
+            console.log(username);
+            firebase.database().ref('users/' + username).push({
+                interest: interest,
+                zipcode: zipcode 
+            }) 
+
+            
+        }
+
+        database.ref().on("value", function(snapshot){
+            console.log(snapshot.val());
         })
 
-    }
+       
 
-    function saveInterest(username, zipcode, interest) {
-        firebase.database().ref('users/' + username + "/zipcode").set({
-            zipcode: zipcode,
-            interest: interest
+        //Dynamically creating buttons
+
+        //On click of sign in on the modal...write User Data to Firebase database
+        $("#signin").on("click", function(event) {
+            event.preventDefault();
+            console.log("Yay");
+            writeUserData();  
+            
         })
-    }
-
-    database.ref().on("value", function (snapshot) {
-        console.log("database", snapshot.val());
-
-    })
-
-    $("#submit").on("click", function (event) {
-        event.preventDefault();
-        saveInterest();
-        createInterestBtn();
-
-    })
-
-    $("#signin").on("click", function (event) {
-        event.preventDefault();
-        console.log("Yay");
-        writeUserData();
-
-    })
-
+        //On click of the submit button for interest and zipcode, 
+        $("#submit").on("click", function(event) {
+            event.preventDefault();
+            console.log("Submit Interest Works");
+            saveInterest();
+            window.location.href = "./index2.html"
+        })
+        
     $(".idea-button").on("click", function (event) {
         userInterest = $(this).text();
         console.log(userInterest);
@@ -94,7 +101,12 @@ $(document).ready(function () {
 
         meetup();
     })
-})
+
+    })
+
+    
+
+
 
 
 
@@ -107,9 +119,6 @@ var lat = 0;
 var lng = 0;
 var zip;
 //int = userInterest; //need to pull from firebase...
-
-
-
 
 //Meetup Local Area Reccommendations
 var recommendURL = "https://api.meetup.com/recommended/groups?";
