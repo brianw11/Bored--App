@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta charset=“utf-8”>
   <link rel="shortcut icon" type="image/png" href="assets/images/tab-icon.png" />
   <title>Bored-App</title>
   <!-- CSS -->
@@ -26,18 +27,55 @@
   <div class="container">
     <h1 class="text-center logo"><b>Bored?</b></h1>
     <div class="row">
-      <div class="col-lg-10">
+      <div class="col-lg-11">
+      <!--Modal for Sign In --->  
+        <div class="modal" tabindex="-1" role="dialog" id="modalcreatenew">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="username-input">User Name</label>
+                    <input class="username" id="username-input" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="email-input">Email</label>
+                    <input class="email" id="email-input" type="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="password-input">Password</label>
+                    <input class="password" id="password-input" type="password">
+                  </div>
+                </form>
+                
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" id="signin">Sign In</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
+      
+      <!--Modal Toggle Button-->
       <div class="col-lg-1">
-        <button class="buttons btn btn-success" type="button" name="submit" data-toggle="modal" data-target="#modalsignin">Sign
-          In</button>
+        <div class="d-flex justify-content-center">
+          <button id="signin" type="button" class="btn btn-success" data-toggle="modal" data-target="#modalcreatenew">
+            Sign In
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <h3 class="today">What are you going to do today?</h3>
-      <div class="col-lg-12 banner-pic image">
+      <div class="col-xs-12 banner-pic image">
         <img class="mySlides w3-animate-fading" src="assets/images/1.jpg">
         <img class="mySlides w3-animate-fading" src="assets/images/2.jpg">
         <img class="mySlides w3-animate-fading" src="assets/images/3.jpg">
@@ -49,7 +87,6 @@
         <img class="mySlides w3-animate-fading" src="assets/images/9.jpg">
       </div>
     </div>
-
 
     <div class="row">
       <div class="col-xs-1 icon">
@@ -105,22 +142,22 @@
     <div class="row inputs">
       <div class="form col-lg-7">
         <form role="form">
-          <div class="form-group">
-            <label class="enter-interest" for="name-input">Enter Your Interest:</label>
-            <input class="interests box" id="interest-input" type="text">
-          </div>
-          <div class="form-group">
-            <label class="enter-location" for="zip-input">Zip Code:</label>
-            <input class="location box" id="location-input" type="number">
-          </div>
-          <button class="btn btn-submit" id="submit" type="submit">Submit</button>
+              <div class="form-group">
+                <label class="enter-interest" for="name-input">Enter Your Interest:</label>
+                <input class="interests box" id="interest-input" type="text">
+              </div>
+              <div class="form-group">
+                <label class="enter-location" for="zipcode-input">Zip Code:</label>
+                <input class="location box" id="location-input" type="number">
+              </div>
+              <a href="./index2.html"><button class="btn btn-submit" id="submit" type="submit">Submit</button></a>
         </form>
 
         <div class="button-group">
           <h4 class="ideas">Here are some ideas:</h4>
-          <button class="idea-button button-1" type="submit">Football</button>
-          <button class="idea-button button-2" type="submit">Books</button>
-          <button class="idea-button button-3" type="submit">Hiking</button>
+          <button class="idea-button button-1" type="submit">Hiking</button>
+          <button class="idea-button button-2" type="submit">Football</button>
+          <button class="idea-button button-3" type="submit">Books</button>
         </div>
       </div>
 
@@ -135,22 +172,27 @@
 
     <footer>
       <p class="foot-text"> &copy; Bored 2018</p>
-      <div class="media">
+      <div class="socialmed">
         <img class="linkedin" src="assets/images/twitter.png" alt="twitter">
         <img class="facebook" src="assets/images/fb.png" alt="facebook">
       </div>
     </footer>
   </div>
-
-
-
-</body>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+<!--Jquery link-->
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous">
 </script>
+<!--Firebase link-->
 <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+ <!--Link Bootstrap JS-->
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+ crossorigin="anonymous"></script>
+<!--Custom Javascript Link-->
+<script src="assets/js/app.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<script src="assets/js/app.js" type="text/javascript"></script>
+</body>
 
 </html>

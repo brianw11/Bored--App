@@ -1,3 +1,4 @@
+
     var myIndex = 0;
 
     carousel();
@@ -22,69 +23,37 @@
     var userInterest;
     var int;
     $(document).ready(function () {
-        //start maps functions
-        //codeAddress();
-        meetup();
+    // Firebase config
+    var config = {
+        apiKey: "AIzaSyBwd_OkkJXouIWKyJSE4dAY2v_4IHVvCVY",
+        authDomain: "bored-app-7c3ca.firebaseapp.com",
+        databaseURL: "https://bored-app-7c3ca.firebaseio.com",
+        projectId: "bored-app-7c3ca",
+        storageBucket: "bored-app-7c3ca.appspot.com",
+        messagingSenderId: "728778720565"
+    };
+    //Firebase Initialized...
+    firebase.initializeApp(config);
 
+    function createInterestButton() {
+        var dataKey = firebase.database().ref().push().key;
+        var ref = firebase.database().ref("users/");
+        ref.once("value").then(function(snapshot) {
+            var data = snapshot.val();
+            console.log(snapshot.val());
+            console.log(data.key.interest);
+            //var interest = snapshot.child(dataKey)
 
+        });
+        //Dynamically create buttons 
+        var x = $("<button>");
+        x.addClass("new-interest");
+        x.attr("data-key", dataKey);
+        x.text(interest + "-" + zipcode);
+        $("#interestButtons").append(x);
+    }
+    createInterestButton();
 
-        // Firebase config
-        var config = {
-            apiKey: "AIzaSyBwd_OkkJXouIWKyJSE4dAY2v_4IHVvCVY",
-            authDomain: "bored-app-7c3ca.firebaseapp.com",
-            databaseURL: "https://bored-app-7c3ca.firebaseio.com",
-            projectId: "bored-app-7c3ca",
-            storageBucket: "bored-app-7c3ca.appspot.com",
-            messagingSenderId: "728778720565"
-        };
-        //Firebase Initialized...
-        firebase.initializeApp(config);
-
-        //Firebase Section ---
-
-        var database = firebase.database();
-        //Firebase variables
-        var username = $("#username-input");
-        var zipcode = $("#zipcodeMain-input");
-        var interest = $("#interest-input");
-        var email = $("#email-input");
-        var password = $("#password-input")
-
-        function writeUserData(username, email, password, zipcode) {
-            //Firebase functions
-            firebase.database().ref('users/' + username).set({
-                email: email,
-                password: password,
-                zipcode: zipcode
-            })
-
-        }
-
-        function saveInterest(username, zipcode, interest) {
-            firebase.database().ref('users/' + username + "/zipcode").set({
-                zipcode: zipcode,
-                interest: interest
-            })
-        }
-
-        database.ref().on("value", function (snapshot) {
-            console.log("database", snapshot.val());
-
-        })
-
-        $("#submit").on("click", function (event) {
-            event.preventDefault();
-            saveInterest();
-            createInterestBtn();
-
-        })
-
-        $("#signin").on("click", function (event) {
-            event.preventDefault();
-            console.log("Yay");
-            writeUserData();
-
-        })
 
         $(".idea-button").on("click", function (event) {
             userInterest = $(this).text();
@@ -94,7 +63,7 @@
 
             meetup();
         })
-    })
+    });
 
 
 
