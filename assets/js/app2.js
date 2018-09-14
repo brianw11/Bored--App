@@ -111,41 +111,7 @@
 
 
 
-    //Meetup Local Area Reccommendations
-    var recommendURL = "https://api.meetup.com/recommended/groups?";
-    $.ajax({
-            url: recommendURL,
-            method: "GET",
-            dataType: 'jsonp',
-            data: {
-                key: "477062e6c76427b59387c3568115f",
-                page: 5,
-            }
-        })
-        .then(function (response) {
-            // console.log("Recommend Response", response.data);
 
-
-            for (var i = 0; i < response.data.length; i++) {
-                var $recommend = $("<div>").addClass("groups");
-                var name = response.data[i].name
-                var next = response.data[i].next_event.name
-                var nextTime = response.data[i].next_event.time
-                var link = response.data[i].link
-                var timeFormat = moment(nextTime).format("ddd MMM Do h:mm a");
-                var bold = 'bold';
-
-                //push group to div
-                $recommend.append("**********************************************************************************");
-                $recommend.append(`<p class=${bold}>Group:</p> ${name}`);
-                $recommend.append(`<p class=${bold}>Next Event:</p> ${next}`);
-                $recommend.append(`<p class=${bold}>Time:</p> ${timeFormat}`);
-                $recommend.append(`<p class=${bold}>Check it out:</p><a href='${link}' target='_blank'>${link}</a>`);
-
-
-                $("#recommendations-field").append($recommend);
-            }
-        });
 
 
     function meetup() {
